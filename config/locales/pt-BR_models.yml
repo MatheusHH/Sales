@@ -1,0 +1,47 @@
+"pt-BR":
+  activerecord:
+    models:
+      cliente: Clientes
+      produto: Produtos
+      entrada: Entradas
+      prodentrada: Produto-entradas
+      recebimento: Recebimentos
+      pedido: Pedidos
+      venda: Vendas
+    attributes:
+      cliente:
+        created_at: "Criado em"
+        telefone: "N° Celular"
+      produto:
+        precocompra: "Preço de compra"
+        precovenda: "Preço de venda"
+        created_at: "Criado em"
+      entrada:
+        valortotal: "Valor Total"
+        created_at: "Criado em"     
+        nf: "N° Pedido"
+        valorunitario: "Valor Unitário"
+      prodentrada: 
+        created_at: "Criado em"
+      recebimento:
+        created_at: "Criado em"
+      pedido:
+        created_at: "Criado em"
+        valorunitario: "Valor Unitário"
+        valortotal: "Valor Total"
+      venda:
+        valortotal: "R$ Total"
+        created_at: "Criado em"
+        valortarifa: "R$ Tarifa"
+        valoreceber: "R$ Receber"
+        valorcomissao: "R$ Comissao"
+      vendedor:
+        created_at: "Criado em"
+      modalidade:
+        created_at: "Criado em"
+      fornecedor:
+        created_at: "Criado em"
+      categoria:
+        created_at: "Criado em"
+      conta:
+        created_at: "Criado em"

@@ -1,0 +1,61 @@
+<%- model_class = Recebimento -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag(recebimentos_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: " abertos / recebidos" %>
+  <%= submit_tag "Buscar" %>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <%= text_field_tag :buscacliente, params[:buscacliente], placeholder: " Nome cliente" %>
+  <%= submit_tag "Buscar por nome" %>
+<% end %>
+<br>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:pedido_id) %></th>
+      <th><%= model_class.human_attribute_name(:cliente) %></th>
+      <th><%= model_class.human_attribute_name(:vencimento) %></th>
+      <th><%= model_class.human_attribute_name(:pagamento) %></th>
+      <th><%= model_class.human_attribute_name(:valor) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recebimentos.each do |recebimento| %>
+      <tr>
+        <td><%= link_to recebimento.id, recebimento_path(recebimento) %></td>
+        <td><%= recebimento.pedido_id %></td>
+        <td><%= recebimento.pedido.cliente.nome %></td>
+        <td><%= formatadata(recebimento.vencimento) %></td>
+        <td><%= formatadata(recebimento.pagamento) %></td>
+        <td><%= number_to_currency(recebimento.valor, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%=l recebimento.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_recebimento_path(recebimento), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      recebimento_path(recebimento),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<b>Valor Total: <%= number_to_currency(@recebimentos.sum(:valor), unit: "R$", separator: ",", delimiter: ".") %></b>
+<br>
+<br>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_recebimento_path,
+            :class => 'btn btn-primary' %>
+<br>
+<br>
+<%= paginate @recebimentos %>

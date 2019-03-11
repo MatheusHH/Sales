@@ -1,0 +1,1 @@
+json.partial! "prodentradas/prodentrada", prodentrada: @prodentrada

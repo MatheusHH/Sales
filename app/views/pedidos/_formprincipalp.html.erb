@@ -1,0 +1,70 @@
+<%= form_for @pedido, :html => { :class => "form-horizontal pedido" } do |f| %>
+
+  <% if @pedido.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@pedido.errors.count, "error") %> prohibited this pedido from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @pedido.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :cliente_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-5">
+      <%= f.collection_select(:cliente_id, Cliente.all, :id, :nome, {prompt: "Selecione o cliente"}, {class: "form-control", :disabled => true})%>
+    </div>
+    <%=f.error_span(:cliente_id) %>
+  </div>
+  <br>
+  <br>
+
+  <%= field_set_tag "Dados da venda" do %>
+    <div id='vendas'>
+      <%= f.fields_for :vendas do |venda| %>
+        <%= render 'editvendas_fields', :f => venda %>
+      <% end %>
+      <div class='links'>
+        <%= link_to_add_association '', f, :vendas, :partial => 'editvendas_fields' %>
+      </div>
+     </div> 
+     <br>
+  <% end %>
+  <br>
+  <br>
+
+  <%= field_set_tag "Dados do vencimento" do %>
+    <div id='recebimentos'>
+      <%= f.fields_for :recebimentos do |recebimento| %>
+        <%= render 'editrecebimentos_fields', :f => recebimento %>
+      <% end %>
+      <div class='links'>
+        <%= link_to_add_association '', f, :recebimentos, :partial => 'editrecebimentos_fields' %>
+      </div>
+     </div> 
+  <% end %>
+
+
+  <div class="form-group">
+    <%= f.label :observacao, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :observacao, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:observacao) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                pedidos_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

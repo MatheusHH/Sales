@@ -1,0 +1,61 @@
+<%= form_for @conta, :html => { :class => "form-horizontal conta" } do |f| %>
+
+  <% if @conta.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@conta.errors.count, "error") %> prohibited this conta from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @conta.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :entrada_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-5">
+      <%= f.collection_select(:entrada_id, Entrada.all, :id, :id, {prompt: "Selecione a Entrada"}, {class: "form-control"}) %>
+    </div>
+    <%=f.error_span(:entrada_id) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :vencimento, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-5">
+      <%= f.text_field :vencimento, placeholder: "yyyy-mm-dd", :class => 'form-control', :required => true %>
+    </div>
+    <%=f.error_span(:vencimento) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :pagamento, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-5">
+      <%= f.text_field :pagamento, placeholder: "yyyy-mm-dd", :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:pagamento) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :valor, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-2">
+      <%= f.text_field :valor, placeholder: "R$ ", :class => 'form-control', :required => true %>
+    </div>
+    <%=f.error_span(:valor) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                contas_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
+
+<script type="text/javascript">
+  $('#conta_vencimento').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})
+  $('#conta_pagamento').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})  
+</script>

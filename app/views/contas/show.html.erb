@@ -1,0 +1,25 @@
+<%- model_class = Conta -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:vencimento) %>:</strong></dt>
+  <dd><%= @conta.vencimento %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:pagamento) %>:</strong></dt>
+  <dd><%= @conta.pagamento %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:valor) %>:</strong></dt>
+  <dd><%= @conta.valor %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:entrada_id) %>:</strong></dt>
+  <dd><%= @conta.entrada_id %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              contas_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_conta_path(@conta), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              conta_path(@conta),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

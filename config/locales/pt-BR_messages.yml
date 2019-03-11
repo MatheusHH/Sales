@@ -1,0 +1,88 @@
+"pt-BR":
+  entradas:
+    create:
+      sucesso: Entrada criada com sucesso !
+    update:
+      atualizado: Entrada atualizada com sucesso !
+    destroy:
+      apagado: Entrada apagada com sucesso !
+
+  clientes:
+    create:
+      sucesso: Cliente criado com sucesso !
+    update:
+      atualizado: Cliente atualizado com sucesso !
+    destroy:
+      apagado: Cliente apagado com sucesso !
+
+  pedidos:
+    create:
+      sucesso: Pedido criado com sucesso !
+    update:
+      atualizado: Pedido atualizado com sucesso !
+    destroy:
+      apagado: Pedido apagado com sucesso ! 
+
+  prodentradas:
+    create:
+      sucesso: Prodentrada criada com sucesso !
+    update:
+      atualizado: Prodentrada atualizada com sucesso !
+    destroy:
+      apagado: Prodentrada apagada com sucesso !
+
+  produtos:
+    create:
+      sucesso: Produto criado com sucesso !
+    update:
+      atualizado: Produto atualizado com sucesso !
+    destroy:
+      apagado: Produto apagado com sucesso ! 
+
+  recebimentos:
+    create:
+      sucesso: Parcela criado com sucesso !
+    update:
+      atualizado: Parcela atualizada com sucesso !
+    destroy:
+      apagado: Parcela apagada com sucesso ! 
+
+  vendas:
+    create:
+      sucesso: Venda criada com sucesso !
+    update:
+      atualizado: Venda atualizada com sucesso !
+    destroy:
+      apagado: Venda apagada com sucesso !
+
+  vendedores:
+    create:
+      sucesso: Vendedor criado com sucesso !
+    update:
+      atualizado: Vendedor atualizada com sucesso !
+    destroy:
+      apagado: Vendedor apagada com sucesso !
+
+  categorias:
+    create:
+      sucesso: Categoria criada com sucesso !
+    update:
+      atualizado: Categoria atualizada com sucesso !
+    destroy:
+      apagado: Categoria apagada com sucesso ! 
+
+  fornecedores:
+    create:
+      sucesso: Fornecedor criado com sucesso !
+    update:
+      atualizado: Fornecedor atualizado com sucesso !
+    destroy:
+      apagado: Fornecedor apagado com sucesso !
+
+  modalidades:
+    create:
+      sucesso: Modalidade criado com sucesso !
+    update:
+      atualizado: Modalidade atualizado com sucesso !
+    destroy:
+      apagado: Modalidade apagado com sucesso !

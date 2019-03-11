@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vencimento: MyString
+  pagamento: MyString
+  valor: 9.99
+  entrada_id: 
+
+two:
+  vencimento: MyString
+  pagamento: MyString
+  valor: 9.99
+  entrada_id: 

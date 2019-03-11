@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pedido_id: 
+  vencimento: 2016-12-04
+  pagamento: 2016-12-04
+  valor: 9.99
+
+two:
+  pedido_id: 
+  vencimento: 2016-12-04
+  pagamento: 2016-12-04
+  valor: 9.99

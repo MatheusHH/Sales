@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  telefone: MyString
+  porcentagem: 9.99
+
+two:
+  nome: MyString
+  telefone: MyString
+  porcentagem: 9.99

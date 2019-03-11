@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nf: 1
+  valortotal: 9.99
+
+two:
+  nf: 1
+  valortotal: 9.99

@@ -1,0 +1,75 @@
+<%- model_class = Pedido -%> 
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <%= link_to "Gerar Recibo (PDF)", pedido_path(@pedido, format: "pdf") %>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:cliente) %>:</strong></dt>
+  <dd><%= @pedido.cliente.nome %></dd>
+  <br>
+  <br>
+
+
+  <%= field_set_tag "Dados da venda" do %>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:vendedor) %></th>
+            <th><%= model_class.human_attribute_name(:produto) %></th>
+            <th><%= model_class.human_attribute_name(:valorunitario) %></th>
+            <th><%= model_class.human_attribute_name(:quantidade) %></th>
+            <th><%= model_class.human_attribute_name(:valortotal) %></th>
+          </tr>
+        </thead>
+      <tbody>
+        <% @pedido.vendas.each do |venda| %>
+          <tr>
+            <td><%= venda.vendedor.nome %></td>
+            <td><%= venda.produto.nome %></td>
+            <td><%= number_to_currency(venda.produto.precovenda, unit: "R$", separator: ",", delimiter: ".") %></td>
+            <td><%= venda.quantidade %></td>
+            <td><%= number_to_currency(venda.valortotal, unit: "R$", separator: ",", delimiter: ".") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <%= field_set_tag "Vencimentos" do %>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:vencimento) %></th>
+            <th><%= model_class.human_attribute_name(:pagamento) %></th>
+            <th><%= model_class.human_attribute_name(:valor) %></th>
+          </tr>
+        </thead>
+      <tbody>
+        <% @pedido.recebimentos.each do |recebimento| %>
+          <tr>
+            <td><%= formatadata(recebimento.vencimento) %></td>
+            <td><%= formatadata(recebimento.pagamento) %></td>
+            <td><%= number_to_currency(recebimento.valor, unit: "R$", separator: ",", delimiter: ".") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>  
+
+  <dt><strong><%= model_class.human_attribute_name(:observacao) %>:</strong></dt>
+  <dd><%= @pedido.observacao %></dd>
+</dl>
+
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              pedidos_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_pedido_path(@pedido), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              pedido_path(@pedido),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+
+

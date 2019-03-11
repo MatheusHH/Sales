@@ -1,0 +1,26 @@
+<div class='nested-fields'>
+
+   <div class="form-group">
+    <%= f.label :vencimento, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :vencimento, :class => 'form-control', :disabled => true, id:"vencimento"  %>
+    </div>
+    <%=f.error_span(:vencimento) %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :valor, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-2">
+      <%= f.text_field :valor, :class => 'form-control', :disabled => true %>
+    </div>
+    <%=f.error_span(:valor) %>
+  </div>
+
+  <%= link_to_remove_association "", f %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#vencimento').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})
+  }) 
+</script>

@@ -1,0 +1,28 @@
+<div class='nested-fields'>
+
+  <div class="form-group">
+    <%= f.label :vencimento, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :vencimento, :class => 'form-control', 'data-behaviour' => 'datepicker' %>
+    </div>
+    <%=f.error_span(:vencimento) %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :valor, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-2">
+      <%= f.text_field :valor, placeholder: "R$ ", :class => 'form-control', :required => true %>
+    </div>
+    <%=f.error_span(:valor) %>
+  </div>
+
+  <div class='links'> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+    <%= link_to_remove_association " Remover vencimento", f %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'});
+</script>
+

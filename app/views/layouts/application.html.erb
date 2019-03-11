@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gestor</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	 <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Gestor de Vendas Web</a>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav">
+  	        <li><%= link_to "Home", root_path %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+        <div class="col-lg-3">
+
+          <% if user_signed_in? %>
+            <div class="well sidebar-nav">
+              <h3>Menu de Opções</h3>
+              <ul class="nav nav-list">
+                <li class="nav-header"></li>
+
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#collapse1">CRM</a>
+                        </h4>
+                      </div>
+                      <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body"><%= link_to "Clientes",clientes_path, id:'corlink' %></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#collapse2">Faturamento</a>
+                        </h4>
+                      </div>
+                      <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body"><%= link_to "Pedidos",pedidos_path, id:'corlink'  %></div>
+                        <div class="panel-body"><%= link_to "Vendas", vendas_path, id:'corlink'  %></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#collapse4">Estoque/Fornecedores</a>
+                        </h4>
+                      </div>
+                      <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body"><%= link_to "Produtos", produtos_path, id:'corlink' %></div>
+                        <div class="panel-body"><%= link_to "Categorias", categorias_path, id:'corlink'%></div>
+                        <div class="panel-body"><%= link_to "Entradas", entradas_path, id:'corlink' %></div>
+                        <div class="panel-body"><%= link_to "Produtos-entradas", prodentradas_path, id:'corlink' %></div>
+                        <div class="panel-body"><%= link_to "Fornecedores", fornecedores_path, id:'corlink' %></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#collapse3">Financeiro</a>
+                        </h4>
+                      </div>
+                      <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body"><%= link_to "Contas a receber", recebimentos_path, id:'corlink' %></div>
+                        <div class="panel-body"><%= link_to "Contas a pagar", contas_path, id:'corlink' %></div>
+                        <div class="panel-body"><%= link_to "Vendedores", vendedores_path, id:'corlink' %></div>
+                        <div class="panel-body"><%= link_to "Modal. Pagamentos", modalidades_path, id:'corlink' %></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>    
+              </ul>
+            </div><!--/.well -->
+          <% end %>
+          
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <!-- <footer> <p> &copy; Company 2016</p> </footer> -->
+
+    </div>
+  <div class="navbar finalbar">
+      
+  </div> <!-- /container -->
+</body>
+</html>

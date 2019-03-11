@@ -1,0 +1,56 @@
+<%- model_class = Entrada -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nf) %>:</strong></dt>
+  <dd><%= @entrada.nf %></dd>
+  <br>
+  <br>
+
+<%= field_set_tag "Entradas de Produtos" do %>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:produto) %></th>
+            <th><%= model_class.human_attribute_name(:valorunitario) %></th>
+            <th><%= model_class.human_attribute_name(:quantidade) %></th>
+          </tr>
+        </thead>
+      <tbody>
+        <% @entrada.prodentradas.each do |prodentrada| %>
+          <tr>
+            <td><%= prodentrada.produto.nome %></td>
+            <td><%= number_to_currency(prodentrada.produto.precocompra, unit: "R$", separator: ",", delimiter: ".") %></td>
+            <td><%= prodentrada.quantidade %></td>            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= model_class.human_attribute_name(:total) %>
+    <%= number_to_currency(@entrada.total, unit: "R$", separator: ",", delimiter: ".") %>
+  <% end %>
+  <br>
+  <br>
+  <%= field_set_tag "Valores" do %>
+    <br>
+    <br>
+    <div class="container">
+      <%= model_class.human_attribute_name(:valortotal) %>
+      <%= number_to_currency(@entrada.valortotal, unit: "R$", separator: ",", delimiter: ".") %>
+    </div>
+  <% end %>
+
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              entradas_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_entrada_path(@entrada), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              entrada_path(@entrada),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

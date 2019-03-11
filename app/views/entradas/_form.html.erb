@@ -1,0 +1,77 @@
+<%= form_for @entrada, :html => { :class => "form-horizontal entrada" } do |f| %>
+
+  <% if @entrada.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@entrada.errors.count, "error") %> prohibited this entrada from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @entrada.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :nf, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-2">
+      <%= f.text_field :nf, placeholder: "Nº Pedido", :class => 'form-control', :required => true %>
+    </div>
+    <%=f.error_span(:nf) %>
+  </div>
+
+  <br>
+
+  <div class="form-group">
+    <%= f.label :fornecedor_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-5">
+      <%= f.collection_select(:fornecedor_id, Fornecedor.all, :id, :nome, {prompt: "Selecione o Fornecedor"}, {class: "form-control"})%>
+    </div>
+    <%=f.error_span(:fornecedor_id) %>
+  </div>
+
+  <%= field_set_tag "Produtos" do %>
+    <div id='prodentradas'>
+      <%= f.fields_for :prodentradas do |prodentrada| %>
+        <%= render 'prodentrada_fields', :f => prodentrada %>
+      <% end %>
+      <div class='links'> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <%= link_to_add_association ' Adicionar produtos', f, :prodentradas, :partial => 'prodentrada_fields' %>
+      </div>
+    </div> 
+  <% end %>
+  <br>
+
+  <%= field_set_tag "Contas a Pagar" do %>
+    <div id='contas'>
+      <%= f.fields_for :contas do |conta| %>
+        <%= render 'conta_fields', :f => conta %>
+      <% end %>
+      <div class='links'> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <%= link_to_add_association ' Adicionar Conta', f, :contas, :partial => 'conta_fields' %>
+      </div>
+    </div> 
+  <% end %>
+  <br>
+
+  <%= field_set_tag "Valores" do %> 
+    <div class="form-group">
+      <%= f.label :valortotal, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-2">
+        <%= f.text_field :valortotal, placeholder: "R$ ", :class => 'form-control', :required => true %>
+      </div>
+      <%=f.error_span(:valortotal) %>
+    </div>
+   <% end %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                entradas_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

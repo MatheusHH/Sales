@@ -1,0 +1,48 @@
+<%= form_for @prodentrada, :html => { :class => "form-horizontal prodentrada" } do |f| %>
+
+  <% if @prodentrada.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@prodentrada.errors.count, "error") %> prohibited this prodentrada from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @prodentrada.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :entrada_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.collection_select(:entrada_id, Entrada.all, :id, :nf, {prompt: "Selecione a nota fiscal"}, {class: "form-control"})%>
+    </div>
+    <%=f.error_span(:entrada_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :produto_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.collection_select(:produto_id, Produto.all, :id, :nome, {prompt: "Selecione o produto"}, {class: "form-control"})%>
+    </div>
+    <%=f.error_span(:produto_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quantidade, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-2">
+      <%= f.text_field :quantidade, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:quantidade) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                prodentradas_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

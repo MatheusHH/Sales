@@ -1,0 +1,88 @@
+<%- model_class = Venda -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag(vendas_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: " Numero do pedido" %>
+  <%= submit_tag "Buscar" %>
+  <br>
+  <br>
+  <%= text_field_tag :datainicial, params[:datainicial], placeholder: " yyyy-mm-dd" %>
+  <%= text_field_tag :datafinal, params[:datafinal], placeholder: " yyyy-mm-dd" %>
+  <%= submit_tag "Filtro data" %>
+  <br>
+  <br>
+  <%= text_field_tag :nomevendedor, params[:nomevendedor], placeholder: " Nome vendedor" %>
+  <%= text_field_tag :vendadatainicial, params[:vendadatainicial], placeholder: " yyyy-mm-dd" %>
+  <%= text_field_tag :vendadatafinal, params[:vendadatafinal], placeholder: " yyyy-mm-dd" %>
+  <%= submit_tag "Comissao" %>
+<% end %>
+<br>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
+      <th><%= model_class.human_attribute_name(:pedido_id) %></th>
+      <th><%= model_class.human_attribute_name(:cliente_id) %></th>
+      <th><%= model_class.human_attribute_name(:produto_id) %></th>
+      <th><%= model_class.human_attribute_name(:quantidade) %></th>
+      <th><%= model_class.human_attribute_name(:valortotal) %></th>
+      <th><%= model_class.human_attribute_name(:valortarifa) %></th>
+      <th><%= model_class.human_attribute_name(:valorcomissao) %></th>
+      <th><%= model_class.human_attribute_name(:valoreceber) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vendas.each do |venda| %>
+      <tr>
+        <!--<td><%= link_to venda.id, venda_path(venda) %></td>-->
+        <td><%= venda.pedido_id %></td>
+        <td><%= venda.pedido.cliente.nome %></td>
+        <td><%= venda.produto.nome %></td>
+        <td><%= venda.quantidade %></td>
+        <td><%= number_to_currency(venda.valortotal, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%= number_to_currency(venda.valortarifa, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%= number_to_currency(venda.valorcomissao, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%= number_to_currency(venda.valoreceber, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%=l venda.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_venda_path(venda), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      venda_path(venda),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<b>Valor Total: <%= number_to_currency(@vendas.sum(:valortotal), unit: "R$", separator: ",", delimiter: ".") %></b>
+<br>
+<b>Valor Total Tarifas: <%= number_to_currency(@vendas.sum(:valortarifa), unit: "R$", separator: ",", delimiter: ".") %></b>
+<br>
+<b>Valor Total Comissoes: <%= number_to_currency(@vendas.sum(:valorcomissao), unit: "R$", separator: ",", delimiter: ".") %></b>
+<br>
+<b>Valor Total Receber: <%= number_to_currency(@vendas.sum(:valoreceber), unit: "R$", separator: ",", delimiter: ".") %></b>
+<br>
+<br>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_venda_path,
+            :class => 'btn btn-primary', :style => "display: none" %>
+<br>
+<br>
+
+<%= paginate @vendas %>
+
+<script type="text/javascript">
+  $('#datainicial').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})
+  $('#datafinal').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})
+  $('#vendadatainicial').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})
+  $('#vendadatafinal').datepicker({format: 'yyyy-mm-dd', language: 'pt-BR'})    
+</script>
